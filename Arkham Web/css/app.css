@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Configs */
+
+input:invalid {
+    border: 2px solid red; 
+  border-radius: 5px; 
+  box-shadow: 0 0 2px red, 0 0 2px red, 0 0 2px red;
+  }
+
+  .fontSize30{
+    font-size: 30px;
+}
+
+/*Fin Configs*/
+
+/*seccion header*/
+
+header {
+    background-color: beige; 
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+  }
+
+.logo-img {
+    width: 90px;
+    height: 90px; 
+    border-radius: 25px;
+    margin-left:25px;
+}
+
+.fw-bolder{
+    color:orangered;
+}
+/* fin header */
+
+/*seccion links*/
+
+.labelForm{
+    color: white;
+}
+
+#menu a, button{
+    font-size: 18px !important;
+    font-weight: 600;   
+}
+.mi-color-personalizado{
+   color:orangered;
+}
+
+#menu a{
+    color:beige;    
+}
+.btn {
+background-color: orangered !important;
+border-color:rgb(53, 71, 65) ;
+}
+
+/* fin links */
+
+/* seccion Body*/
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    background-color: rgb(53, 71, 65);
+    color: white;
+}
+
+/* fin body */
+
+/* seccion footer*/
+footer {
+    background:rgb(53, 71, 65);
+    min-height: 100px;
+}
+footer p{
+    color:#f3f3f3;
+    text-align:center;
+}
+#iconos  i {
+    font-size: 26px;
+    padding: 0 8px;
+    color:#f3f3f3;
+}
+
+/*fin footer*/

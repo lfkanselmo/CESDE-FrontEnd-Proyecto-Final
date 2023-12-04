@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.bord{
+   border-color:rgb(53, 71, 65) ;
+}
+
+.carousel-inner {
+   max-height:39rem !important;
+}
+
+.disclaimer{
+font-style: italic !important;
+}
+
+#img-equipo{
+    max-height:30rem !important;
+    width:50%;
+}
+
+
+
+#local {
+    margin-top:50px;
+    background-color: whitesmoke;
+    display:flex;
+    justify-content: center; 
+    padding-bottom: 300px; 
+}
+
+
+.img-hover {
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.img-hover:hover {
+    transform: scale(1.1); 
+}
+
+.px-45{
+    color:beige; 
+}
+
+
+.wrapper-local {
+    width:70%;
+    margin-left:100px;
+    padding-top:150px;
+    color: orangered;
+}
+
+.wi-40{
+    width: 40%;
+}
+
+
+
+
+#numeros-local{
+    margin:0 !important;
+    padding:0 !important;
+}
+#numeros-local div {
+    padding: 0 20px 0 0;   
+    text-align:left;
+    height:48px;
+    color: red;
+}
+
+#numeros-local div:not(:last-child) {
+    border-right: 2px solid #3f3f3f;
+  }
+#numeros-local div:not(:first-child) {
+    padding-left:20px;
+  }
+
+#numeros-local p{
+    margin:0;
+}
+
+.degrad{
+    background: linear-gradient(rgb(53, 71, 65), rgb(109, 117, 88));
+}
+
+#bg-contactos{
+    position:relative;
+    top: -130px;
+} 
+
+ #seccion-contacto{
+    background-color: rgb(109, 117, 88);
+    min-height:500px;
+    position:relative;
+    background: linear-gradient( rgb(109, 117, 88),rgb(53, 71, 65));
+}
+.beige{
+    color: beige;
+}
+.bolderlista{
+    font-weight:bolder;
+}
+/* formulario */
+
+#contenedor-formulario{
+    background: #fbfafa;
+    border-radius:3px;  
+    background: linear-gradient(rgb(53, 71, 65), rgb(109, 117, 88));
+    box-shadow: #433d3dcd  5px 5px;
+    margin-bottom: 15px;
+  
+}
+
+#titulo-formulario {
+    color: #3f3f3f;
+}
+
+.btn-mi-estilo {
+    color: white;            
+  }
+
+
+
+@media (max-width:1200px){
+    #intro, #equipo {
+        width:90% !important;
+        margin:auto;
+    }
+  
+    #local {
+        flex-wrap: wrap;
+        padding-top:30px;
+   }
+   .wrapper-local {
+    width:90%;
+    margin:auto;
+    padding-top:50px;    
+   }
+ 
+}
+
+
+
+@media (max-width:768px) {
+
+    #intro, #equipo{
+        width:90% !important;
+        margin:auto;
+    }
+
+    
+    #img-equipo{
+        max-height:20rem !important;
+        width:90%;
+    }
+    .wrapper-local {
+        width:90%;
+        margin:auto;
+        padding-top:50px;    
+    }
+    #local {
+        flex-wrap: wrap;
+    }
+    .mapa img {
+        width:100%;
+        height:auto;
+    }
+    #bg-contactos{
+        top: -120px;
+    }
+
+
+}
+
+
+@media (max-width: 576px) {
+    #servicios-fila-2 {
+        width:100% !important;
+    }
+    #servicios-fila-1 {
+        width:100% !important;
+    }
+
+    .icono-wrap{
+        flex-wrap:wrap !important;
+        justify-content: center !important;
+        text-align: center;
+    }
+}

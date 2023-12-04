@@ -174,12 +174,8 @@ function agregarCita(btnAgendar){
     let id = tabla.querySelector("#idValor");
     idCapturado = id.innerText;
     console.log(idCapturado)
-    return idCapturado;
-}
 
-
-function recibirIdCapturado(){
-    return idCapturado;
+    localStorage.setItem("idCapturado", JSON.stringify(idCapturado));
 }
 
 /*---------------------------------------------------------------------------------------------------*/

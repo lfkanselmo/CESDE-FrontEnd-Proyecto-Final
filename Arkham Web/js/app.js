@@ -1,4 +1,5 @@
 const d = document;
+const urlDomain = "http://localhost:8090/api";
 
 function mostrarFormulario(idFormulario) {
     

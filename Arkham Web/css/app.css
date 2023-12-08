@@ -85,3 +85,26 @@ footer p{
 }
 
 /*fin footer*/
+
+/* Boton de scroll */
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+
+  #myBtn:hover {
+    background-color: white;
+    color:black;
+  }
+/*fin boton scroll*/

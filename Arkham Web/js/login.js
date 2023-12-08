@@ -14,7 +14,6 @@ function login() {
         password: password
     })
     .then(function (response) {
-        console.log(response.data.token);
         alertaExito("Bienvenido");
         inicioExitoso = true;
         actualizarTokenLS(response.data.token);
@@ -77,7 +76,8 @@ function cancelarYVolver(btnCancelar){
     let form = btnCancelar.parentElement;
     let inputs = form.querySelectorAll("input");
     limpiarInputs(inputs);
-    volverAPaginaPrevia(true);
+    //volverAPaginaPrevia(true);
+    window.location.href = "index.html";
 
 
 
@@ -112,6 +112,7 @@ function limpiarInputs(inputs){
     });
 }
 
+/*
 // Funcion para volver a la pagina anterior
 function volverAPaginaPrevia(Exitoso){
     if (Exitoso) {
@@ -127,3 +128,4 @@ function volverAPaginaPrevia(Exitoso){
         window.location.href = paginaPrevia;
       }
 }
+*/

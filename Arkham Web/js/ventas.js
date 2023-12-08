@@ -1,5 +1,5 @@
 // Carga inicial de la página
-window.addEventListener("load", async () => {
+window.addEventListener("DOMContentLoaded", async () => {
     await cargarInmueblesPorOferta("venta");
     await validarTokenActual();
 })

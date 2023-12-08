@@ -1,6 +1,21 @@
 // Variables globales
 let idCapturado;
 
+// Boton de scroll
+window.addEventListener("scroll", (event)=>{
+    if(window.scrollY > 200){
+        btn.style.display = "block";
+    }else{
+        btn.style.display ="none";
+    }
+});
+
+btn.addEventListener("click", () =>{
+    window.scrollTo(top);
+    btn.style.display = "none";
+});
+
+
 // Funcion para habilitar los campos y editar los atributos de las propiedades
 function editarPropiedad(btnEditar) {
     let tabla = btnEditar.parentElement.parentElement.parentElement.parentElement;
@@ -28,6 +43,7 @@ function editarPropiedad(btnEditar) {
     let disponibilidad = tabla.querySelector("#disponibilidad");
     let oferta = tabla.querySelector("#oferta");
     let tipo = tabla.querySelector("#tipo");
+    let imagen = tabla.querySelector("#imagen");
 
     // Selección de span donde se muestra la info
     let ciudadValor = tabla.querySelector("#ciudadValor");
@@ -44,6 +60,7 @@ function editarPropiedad(btnEditar) {
     let disponibilidadValor = tabla.querySelector("#disponibilidadValor");
     let ofertaValor = tabla.querySelector("#ofertaValor");
     let tipoValor = tabla.querySelector("#tipoValor");
+    let imagenValor = tabla.querySelector("#imagenValor");
 
 
     btnAgendar.classList.add("d-none");
@@ -90,6 +107,9 @@ function editarPropiedad(btnEditar) {
     direccion.value = direccionValor.innerText;
     oferta.value = ofertaValor.innerText;
     tipo.value = tipoValor.innerText;
+    imagen.value = imagenValor.innerText;
+
+    console.log(imagen)
 
 
     // Evento cuando se le da click a cancelar la edición
@@ -141,6 +161,7 @@ async function guardarCambios(btnGuardar) {
     let disponibilidad = tabla.querySelector("#disponibilidad");
     let oferta = tabla.querySelector("#oferta");
     let tipo = tabla.querySelector("#tipo");
+    let imagen = tabla.querySelector("#imagen");
 
     // Selección de spans finales
     let idValor = tabla.querySelector("#idValor");
@@ -158,6 +179,7 @@ async function guardarCambios(btnGuardar) {
     let disponibilidadValor = tabla.querySelector("#disponibilidadValor");
     let ofertaValor = tabla.querySelector("#ofertaValor");
     let tipoValor = tabla.querySelector("#tipoValor");
+    let imagenValor = tabla.querySelector("#imagenValor");
 
     // Se captura el resultado de la alerta y se ejecuta la funcion de guardado si se le da al botón guardar
     let res = await GuardarAlert();
@@ -181,6 +203,7 @@ async function guardarCambios(btnGuardar) {
         disponibilidadValor.innerText = disponibilidad.value;
         ofertaValor.innerText = oferta.value;
         tipoValor.innerText = tipo.value;
+        imagenValor.innerText = imagen.value;
 
         let datosNuevos = {
             propertyId: Number(idValor.innerText),
@@ -197,10 +220,11 @@ async function guardarCambios(btnGuardar) {
             address: direccionValor.innerText,
             availability: convertirABoolean(disponibilidadValor.innerText),
             offer: ofertaValor.innerText,
-            propertyType: tipoValor.innerText
+            propertyType: tipoValor.innerText,
+            image: imagenValor.innerText
         }
 
-        console.log(datosNuevos);
+        console.log(datosNuevos)
 
         await guardarCambiosBD(datosNuevos);
 
@@ -243,7 +267,9 @@ async function guardarCambiosBD(datosNuevos) {
         }
     })
         .then(response => {
-            console.log(response)
+            if(response.status === 200){
+                console.log("Modificado con éxito")
+            }
         })
         .catch(error => {
             console.error(error)
@@ -259,7 +285,6 @@ function agregarCita(btnAgendar) {
     let tabla = btnAgendar.parentElement.parentElement.parentElement.parentElement.parentElement;
     let id = tabla.querySelector("#idValor");
     idCapturado = id.innerText;
-    console.log(idCapturado)
 
     localStorage.setItem("idCapturado", JSON.stringify(idCapturado));
 }
@@ -267,15 +292,7 @@ function agregarCita(btnAgendar) {
 /*---------------------------------------------------------------------------------------------------*/
 
 
-// Funcion para limpiar los campos de editar
-function limpiarCamposEditables(campos) {
-    campos.forEach(campo => {
-        let campoInput = campo.firstElementChild;
-        if (campoInput.tagName === "INPUT") {
-            campoInput.value = "";
-        }
-    })
-}
+
 
 // Funcion para ocultar los campos que deberían estar ocultos para la vista de cliente
 function desactivarCamposOcultos(camposOcultos) {
@@ -288,20 +305,7 @@ function desactivarCamposOcultos(camposOcultos) {
 /*---------------------------------------------------------------------------------------------------*/
 
 
-// Función para validar los datos
-function validarDatos(campos) {
-    let todosValidos = true;
-    campos.forEach(function (contenedorCampo) {
-        let campo = contenedorCampo.firstElementChild;
 
-        // Si el input o select está vacío, o es invalido retorna false
-
-        if (campo.value === "" || campo.validity.valid === false || (campo.tagName === 'SELECT' && campo.value === "0")) {
-            todosValidos = false;
-        }
-    });
-    return todosValidos;
-}
 
 /*---------------------------------------------------------------------------------------------------*/
 
@@ -346,38 +350,14 @@ function crearPropiedades(propiedades, oferta) {
 
                 propiedad.innerHTML =
                     `
-                    <div class="row g-0">
+                    <div class="row g-0 justify-content-center">
                         <div class="col-md-8 d-flex justify-content-center align-items-center"
                             style="max-width: 550px;">
                             <!--  carrusel de imágenes -->
-                            <div class="ms-5">
-                                <div id="carousel" class="carousel slide" data-bs-ride="carousel"
-                                    style="max-width: 550px;">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active " data-bs-interval="2000">
-                                            <img src="media/casa1/casa1.jpeg"
+                            <div class="imgContenedor">
+                                            <img src="${p.image}"
                                                 class="img-fluid rounded-start d-block w-100" alt="...">
                                         </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa1/sala.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa1/habitacion.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa1/cocina.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa1/baño.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-6 ms-3">
                             <div class="card-body">
@@ -436,7 +416,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 <strong class="mx-1">Dirección:</strong>
                                             </th>
                                             <th>
-                                                <span>$ <span id="direccionValor"> ${p.address} </span></span>
+                                                <span> <span id="direccionValor"> ${p.address} </span></span>
                                                 
                                             </th>
                                             <th class="camposEditar d-none">
@@ -585,6 +565,23 @@ function crearPropiedades(propiedades, oferta) {
                                             </td>
                                             <td class="camposEditar d-none">
                                                 <input type="number" name="nivel" min="1" max="100" id="nivel">
+                                            </td>
+                                        </tr>
+
+                                        <tr class="camposOcultos d-none">
+                                            <td colspan="3">
+                                                <strong class="mx-1">URL Imagen:</strong>
+                                            </td>
+                                            </tr>
+                                            <tr class="camposOcultos d-none" >
+                                            <td colspan="3">
+                                                <span> <span id="imagenValor"> ${p.image} </span></span>
+                                                
+                                            </td>
+                                            </tr>
+                                            <tr class="camposOcultos d-none">
+                                            <td class="camposEditar d-none" colspan="3">
+                                                <input type="text" name="imagen" min="1" id="imagen" class="w-100">
                                             </td>
                                         </tr>
 

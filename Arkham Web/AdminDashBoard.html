@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/app.css">
     <link rel="shortcut icon" href="media/logo.png" />
 
-    <title>FORMULARIO CITAS</title>
+    <title>DASHBOARD ADMINISTRADOR</title>
 </head>
 
 <body>
@@ -72,88 +72,7 @@
 
     <section id="seccion-contacto" class="border-bottom border-secondary border-2 mb-3 ">
 
-        <div class="container  " style="max-width: 1000px" id="contenedor-formulario ">
-            <div class="text-center mb-4" id="titulo-formulario">
-                <div><img src="media/asesoria.jpeg" alt="" class="img-fluid ps-5 mt-5 col-5 rounded"></div>
-                <h2 class="mi-color-personalizado">Agenda Una Cita</h2>
-                <p class="fs-5 text-light">Estamos aquí para ayudarte a encontrar tu Hogar</p>
-            </div>
-
-
-            <!-- seccion formulario de citas -->
-
-            <div class="container">
-                <div class="row justify-content-center">
-
-
-                    <!-- campos del formulario -->
-                    <div class="col-7">
-                        <form class="p-4 formCitas">
-                            <div class="mb-3 fontSize30 fw-bolder">
-                                <label class="form-label">ID Propiedad: </label>
-                                <span id="idPropiedad">#</span>
-                            </div>
-
-                            <label class="form-label">Documento</label>
-                            <div class="mb-3 datoCliente">
-                                <input type="number" pattern="[0-9]{8,10}(\.[0-9]+)?" min="10000000" class="documento form-control">
-                                <button type="button" class="buscarCliente btn btn-secondary my-1" onclick="buscarCliente()">Buscar</button>
-                            </div>                            
-
-                            <label class="form-label">Nombre</label>
-                            <div class="mb-3 datoCliente">
-                                <input type="text" class=" nombre form-control" readonly>
-                            </div>
-
-                            <label class="form-label">Apellido</label>
-                            <div class="mb-3 datoCliente">
-                                <input type="text" class=" apellido form-control" readonly>
-                            </div>
-
-                            <label class="form-label">Teléfono</label>
-                            <div class="mb-3 datoCliente">
-                                <input type="number" pattern="[0-9]+(\.[0-9]+)?" class=" telefono form-control" readonly>
-                            </div>
-
-                            <label class="form-label">Email</label>
-                            <div class="mb-3 datoCliente">
-                                <input type="email" class=" email form-control" readonly>
-                            </div>
-
-                            <div class="mb-3 d-flex justify-content-center">
-                                <h5 class="fw-bold d-flex text-center disclaimer">Sus datos serán almacenados con fines
-                                    estadidisticos</h5>
-                            </div>
-
-                            <button type="button" class=" btn  btn-mi-estilo w-100 fs-5 btn-guardarDatos mb-5" onclick="guardarClienteBD()">Guardar datos</button>
-
-                            <!-- SECCION CALENDARIO-->
-                            <div class="mb-3">
-                                <label class="form-label">Fecha</label>
-                                <input type="date" class="fecha form-control">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Hora de cita</label>
-                                <br>
-                                <select name="hora" id="hora">
-                                    <option value="" disabled selected hidden>Seleccione hora</option>
-                                </select>
-                            </div>
-
-                            <!-- botones -->
-                            <button type="button" class=" btn  btn-mi-estilo w-100 fs-5 btn-agendar" onclick="guardarCita()">Agendar
-                                Cita</button>
-                        </form>
-
-
-
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        
     </section>
 
     <button id="myBtn" title="Go to top">Subir</button>
@@ -177,11 +96,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/validacionSesion.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="/js/sweetAlert.js"></script>
-    <script src="/js/propiedades.js"></script>
     <script src="/js/app.js"></script>
-    <script src="/js/citas.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 async function validarTokenActual() {
     let tokenEnLS = JSON.parse(localStorage.getItem("token"));
     let urlToken = urlDomain + "/token/check";
+    let result;
 
     objetoToken = {
         token: tokenEnLS
@@ -11,14 +12,17 @@ async function validarTokenActual() {
         .then(response => {
             let objeto = response.data;
             if (objeto.revoked || objeto.expired) {
-                comprobacionDeSesion(false);
+                result = comprobacionDeSesion(false);
             } else {
-                comprobacionDeSesion(true);
+                result = comprobacionDeSesion(true);
             }
         })
         .catch(error => {
             console.log(error)
+            result = false;
         })
+
+        return result;
 
 }
 
@@ -37,6 +41,7 @@ function comprobacionDeSesion(validez) {
         }
 
         ocultarEditarPropiedades(validez, nombreArchivo, document);
+        return true;
     } else {
         if (btnIniciar.classList.contains("d-none")) {
             btnIniciar.classList.remove("d-none");
@@ -46,6 +51,7 @@ function comprobacionDeSesion(validez) {
             btnCerrarSesion.classList.add("d-none");
         }
         ocultarEditarPropiedades(validez, nombreArchivo, document);
+        return false;
     }
 }
 

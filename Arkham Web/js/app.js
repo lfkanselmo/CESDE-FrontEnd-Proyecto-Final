@@ -1,6 +1,6 @@
 const d = document;
 const urlDomain = "http://localhost:8090/api";
-
+let btn = document.querySelector("#myBtn");
 
 // Funcion para cerrar sesión
 function cerrarSesion(){
@@ -50,4 +50,50 @@ function cancelar(idFormulario) {
     })
 
     formulario.style.display = 'none';
+}
+
+// Función para validar los datos
+function validarDatos(campos) {
+    let todosValidos = true;
+    campos.forEach(function (contenedorCampo) {
+        let campo = contenedorCampo.firstElementChild;
+
+        // Si el input o select está vacío, o es invalido retorna false
+
+        if(campo.classList.contains("documento")){
+            btnBuscar.disabled = false;
+        }
+
+        if (campo.value === "" || campo.validity.valid === false || (campo.tagName === 'SELECT' && campo.value === "0")) {
+            todosValidos = false;
+        }
+    });
+    return todosValidos;
+}
+
+
+// Funcion para limpiar los campos de editar
+function limpiarCamposEditables(campos) {
+    campos.forEach(campo => {
+        let campoInput = campo.firstElementChild;
+        if (campoInput.tagName === "INPUT") {
+            campoInput.value = "";
+        }
+    })
+}
+
+// Funcion para volver a la pagina anterior
+async function volverAPaginaPrevia(Exitoso){
+    if (Exitoso) {
+        // Guardar página previa
+        var paginaPrevia = document.referrer;
+
+
+        if (paginaPrevia === "" || paginaPrevia === window.location.href) {
+            paginaPrevia = "index.html";
+        }
+
+        // Redirige a la página anterior
+        window.location.href = paginaPrevia;
+      }
 }

@@ -33,3 +33,19 @@ async function GuardarAlert() {
 
     return resultado;
 }
+
+function alertaExito(mensajeRecibido){
+    Swal.fire({
+        title: "Exito",
+        text: mensajeRecibido,
+        icon: "success"
+      });
+}
+
+function alertaError(mensajeRecibido){
+    Swal.fire({
+        title: "Error",
+        text: mensajeRecibido,
+        icon: "error"
+      });
+}

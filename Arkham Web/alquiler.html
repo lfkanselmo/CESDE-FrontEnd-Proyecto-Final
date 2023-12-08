@@ -62,69 +62,10 @@
                         <!-- REGISTRO E INICIO DE SESION -->
                         <div id="galeria"></div>
                         <div class="botonesRegistroLogin d-flex justify-content-end p-2 ">
-                            <button id="btnRegistrarse" class="btn btn-secondary mx-2"
-                                onclick="mostrarFormulario('formularioRegistrarse')">Registrarse</button>
-                            <button id="btnIniciarSesion" class="btn btn-secondary mx-2"
-                                onclick="mostrarFormulario('formularioIniciarSesion')">Iniciar sesión</button>
+                                <a id="btnIniciarSesion" href="login.html" class="btn btn-secondary mx-2">Iniciar sesión</a>
+                                <button type="button" id="btnCerrarSesion" class="btn btn-secondary mx-2 d-none" onclick="cerrarSesion()">Cerrar sesión</button>
                         </div>
                     </div>
-
-
-
-                    <!-- FORMULARIOS REGISTRO Y LOGIN-->
-
-                    <div class="formularios col-12 d-flex mt-5 justify-content-end">
-                        <div id="formularioRegistrarse" class="formulario w-25" style="display: none;">
-                            <h2>Registro</h2>
-                            <form>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="nombre">Nombre:</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="apellido">Apellido:</label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="telefono">Teléfono:</label>
-                                    <input type="tel" class="form-control" id="telefono" pattern="(\+\d{1,3})?(\d{9,10})" title="Ingresa un número telefónico válido" name="telefono" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="contrasenaRegistro">Contraseña:</label>
-                                    <input type="password" class="form-control" id="contrasenaRegistro"
-                                        name="contrasenaRegistro" required>
-                                </div>
-                                <button type="submit" class="btn btn btn-secondary">Registrarse</button>
-                                <button type="button" class="btn btn-secondary"
-                                    onclick="cancelar('formularioRegistrarse')">Cancelar</button>
-                            </form>
-                        </div>
-
-
-                        <div id="formularioIniciarSesion" class="formulario w-25" style="display: none;">
-                            <h2>Iniciar Sesión</h2>
-                            <form>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="usuarioInicioSesion">Email:</label>
-                                    <input type="email" class="form-control" id="usuarioInicioSesion"
-                                        name="usuarioInicioSesion" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="labelForm" for="contrasenaInicioSesion">Contraseña:</label>
-                                    <input type="password" class="form-control" id="contrasenaInicioSesion"
-                                        name="contrasenaInicioSesion" required>
-                                </div>
-                                <button type="submit" class="btn btn-secondary">Iniciar</button>
-                                <button type="button" class="btn btn-secondary"
-                                    onclick="cancelar('formularioIniciarSesion')">Cancelar</button>
-                            </form>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             </div>
@@ -143,206 +84,7 @@
         <div class="container">
             <!-- casa muestra -->
             <div class="propiedades ms-5">
-                <div class="propiedad card mb-8 border-3" style="max-width: 1250px;">
-                    <div class="row g-0">
-                        <div class="col-md-8 d-flex justify-content-center align-items-center"
-                            style="max-width: 550px;">
-                            <!--  carrusel de imágenes -->
-                            <div class="ms-5">
-                                <div id="carousel" class="carousel slide" data-bs-ride="carousel"
-                                    style="max-width: 550px;">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active " data-bs-interval="2000">
-                                            <img src="media/casa2/casa2.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa2/sala.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa2/habitacion.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa2/cocina.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item" data-bs-interval="2000">
-                                            <img src="media/casa2/baño.jpg"
-                                                class="img-fluid rounded-start d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 ms-3">
-                            <div class="card-body">
-
-                                <!-- Tabla para la info de las propiedades -->
-                                <table class="tablaInfo text-color-black my-5">
-                                    <thead>
-                                        <tr class="fw-bolder fontSize30">
-                                            <th>
-                                                <strong class="mx-1">ID: </strong>
-                                            </th>
-                                            <th>
-                                                <span id="idValor">1</span>
-                                            </th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>
-                                                <strong class="mx-1">Ciudad:</strong>
-                                            </th>
-                                            <th>
-                                                <span id="ciudadValor">Medellin</span>
-                                            </th>
-                                            <th class="camposEditar d-none">
-                                                <input type="text" name="ciudad" id="ciudad">
-                                            </th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>
-                                                <strong class="mx-1">Barrio:</strong>
-                                            </th>
-                                            <th>
-                                                <span id="barrioValor">Poblado</span>
-                                            </th>
-                                            <th class="camposEditar d-none">
-                                                <input type="text" name="barrio" id="barrio">
-                                            </th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>
-                                                <strong class="mx-1">Precio:</strong>
-                                            </th>
-                                            <th>
-                                                <span>$ <span id="precioValor">150000000</span></span>
-                                                
-                                            </th>
-                                            <th class="camposEditar d-none">
-                                                <input type="number" name="precio" min="1" id="precio">
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <!-- Cuerpo de la info -->
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">Patio:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="patioValor">si</span>
-                                            </td>
-                                            <td class="camposEditar d-none">
-                                                <select name="patio" id="patio">
-                                                    <option value="si">Si</option>
-                                                    <option value="no">No</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">zona de ropa:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="zonaRopaValor">si</span>
-                                            </td>
-                                            <td class="camposEditar d-none">
-                                                <select name="zonaRopa" id="zonaRopa">
-                                                    <option value="si">Si</option>
-                                                    <option value="no">No</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">Gas Natural:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="gasNaturalValor">si</span>
-                                            </td>
-                                            <td class="camposEditar d-none">
-                                                <select name="gasNatural" id="gasNatural">
-                                                    <option value="si">Si</option>
-                                                    <option value="no">No</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">Baños:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="banosValor">2</span>
-                                            </td>
-                                            <td class="camposEditar d-none">
-                                                <input type="number" name="banhos" min="1" max="10" id="banhos">
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">Area m2:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="areaValor">80</span>
-                                            </td>
-                                            <td class="camposEditar d-none">
-                                                <input type="number" name="area" min="1" id="area">
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">Habitaciones:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="habitacionesValor">3</span>
-                                            </td>
-
-                                            <td class="camposEditar d-none">
-                                                <input type="number" name="habitaciones" min="1" max="10"
-                                                    id="habitaciones">
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <strong class="mx-1">Nivel:</strong>
-                                            </td>
-                                            <td>
-                                                <span id="nivelValor">3</span>
-                                            </td>
-                                            <td class="camposEditar d-none">
-                                                <input type="number" name="nivel" min="1" max="100" id="nivel">
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                    <tfoot class="mt-5">
-                                        <tr>
-                                            <td colspan="3" class="py-3">
-                                                <a href="citas.html"><button class="btn-agendar btn btn-primary" onclick="agregarCita(this)">Agenda tu cita</button></a>
-                                                <button class="btn-editar btn btn-primary"
-                                                    onclick="editarPropiedad(this)">Editar</button>
-                                                    <button class="btn-guardar btn btn-primary d-none" onclick="guardarCambios(this)">Guardar</button>
-                                                    <button class="btn-cancelar btn btn-primary d-none">Cancelar</button>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
@@ -365,8 +107,10 @@
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/validacionSesion.js"></script>
     <script src="js/sweetAlert.js"></script>
     <script src="/js/app.js"></script>
+    <script src="js/axios.min.js"></script>
     <script src="/js/alquiler.js"></script>
     <script src="js/propiedades.js"></script>
 </body>

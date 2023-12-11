@@ -187,6 +187,7 @@ async function guardarCambios(btnGuardar) {
     }
 
     async function guardando() {
+        let camposOcultos = tabla.querySelectorAll(".camposOcultos");
         // Proceso de guardado de nuevos valores, reemplazar a futuro por el consumo de la API
         ciudadValor.innerText = ciudad.value.trim();
         barrioValor.innerText = capitalizar(barrio.value.trim());
@@ -233,6 +234,8 @@ async function guardarCambios(btnGuardar) {
         btnEditar.classList.remove("d-none");
 
         limpiarCamposEditables(editables);
+        desactivarCamposOcultos(camposOcultos);
+        
 
         editables.forEach(campo => {
             campo.classList.add("d-none");
@@ -344,7 +347,7 @@ function crearPropiedades(propiedades, oferta) {
 
                 let propiedad = document.createElement("div");
                 propiedad.style.maxWidth = "1250px";
-                propiedad.setAttribute("class", "propiedad card my-5 border-3 rounded py-3");
+                propiedad.setAttribute("class", "propiedad card my-5 d-flex gap-2 border-3 rounded p-3 w-100");
 
                 propiedad.innerHTML =
                     `
@@ -361,7 +364,7 @@ function crearPropiedades(propiedades, oferta) {
                             <div class="card-body">
 
                                 <!-- Tabla para la info de las propiedades -->
-                                <table class="tablaInfo text-color-black my-5">
+                                <table class="tablaInfo text-color-black my-5 w-75">
                                     <thead>
                                         <tr class="fw-bolder fontSize30">
                                             <th>
@@ -566,19 +569,21 @@ function crearPropiedades(propiedades, oferta) {
                                             </td>
                                         </tr>
 
-                                        <tr class="camposOcultos d-none">
+                                        <tr class="camposOcultos w-100 d-none">
                                             <td colspan="3">
                                                 <strong class="mx-1">URL Imagen:</strong>
                                             </td>
                                             </tr>
                                             <tr class="camposOcultos d-none" >
                                             <td colspan="3">
-                                                <span> <span id="imagenValor"> ${p.image} </span></span>                                                
+                                                <span class="w-75" > <span id="imagenValor"> ${p.image} </span></span>                                                
                                             </td>
                                             </tr>
                                             <tr class="camposOcultos d-none">
                                             <td class="camposEditar d-none" colspan="3">
-                                                <input type="text" name="imagen" min="1" id="imagen" class="w-100">
+                                            <textarea name="imagen" id="imagen" cols="30" class="w-75" rows="10"></textarea>
+                                            
+                                            
                                             </td>
                                         </tr>
 

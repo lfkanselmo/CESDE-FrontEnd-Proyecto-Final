@@ -116,3 +116,11 @@ footer p{
     color:black;
   }
 /*fin boton scroll*/
+
+/*para los Text Area*/
+textarea {
+    width: 100px !important;
+    height: 70px !important;
+    resize: none !important;
+  }
+/*Fin textArea*/

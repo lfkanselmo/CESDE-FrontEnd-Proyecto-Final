@@ -14,6 +14,8 @@ fechaEditar.setAttribute("min", format);
 let documentoABuscar = document.querySelector(".documentoABuscar");
 
 window.addEventListener("DOMContentLoaded", async () => {
+    validarTokenActual()
+
     documentoABuscar.value = "";
 })
 
@@ -88,8 +90,8 @@ function ponerDatosEnTabla(citas) {
             <td> ${cita.date} </td>
             <td> ${cita.startTime} </td>
             <td> ${cita.propertyListRecord.address} </td>
-            <td> ${cita.clientListRecord.firstName} ${cita.clientListRecord.lastName}</td>
-            <td> ${cita.clientListRecord.phone} </td>
+            <td> ${cita.userListRecord.firstName} ${cita.userListRecord.lastName}</td>
+            <td> ${cita.userListRecord.phone} </td>
             <td>
                 <span class="btn-editarCita btn btn-warning" onclick= "actualizarCita(${cita.appointmentId})" > 📝 </span> 
                 <span class="btn-borrarCita btn btn-danger" onclick= "solicitarBorrarCita(${cita.appointmentId})" > ❌ </span> 

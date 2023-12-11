@@ -251,7 +251,7 @@ function guardarInmuebleBD() {
     let area = formInmuebles.querySelector("#area").value;
     let gasNatural = convertirABooleanInmueble(formInmuebles.querySelector("#gasNatural").value);
     let zonaRopa = convertirABooleanInmueble(formInmuebles.querySelector("#zonaRopa").value);
-    let direccion = formInmuebles.querySelector("#direccion").value;
+    let direccion = capitalizar(formInmuebles.querySelector("#direccion").value);
     let barrio = capitalizar(formInmuebles.querySelector("#barrio").value);
     let ciudad = capitalizar(formInmuebles.querySelector("#ciudad").value);
     let imagen = formInmuebles.querySelector("#imagen").value;

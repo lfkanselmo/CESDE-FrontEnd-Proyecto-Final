@@ -21,9 +21,10 @@
 
     <!-- HEADER -->
 
-    <header class="container-fluid bg-mi-color d-flex flex-column align-items-center justify-content-center flex-sm-row justify-content-sm-between align-items-sm-center py-2">
+    <header
+        class="container-fluid bg-mi-color d-flex flex-column align-items-center justify-content-center flex-sm-row justify-content-sm-between align-items-sm-center py-2">
         <div class="logo">
-            <img src="media/logoHeader.jpg" alt="Logo" class="logo-img">
+            <img src="media/logoHeader.jpg" alt="Logo" class="logo-img mx-auto">
         </div>
         <p class="fs-4 fw-bolder text mb-0 fs-6 mx-auto ">LOS MEJORES INMUEBLES A TU ALCANCE</p>
     </header>
@@ -41,10 +42,10 @@
                     </div>
                     <div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -90,8 +91,10 @@
                         <div class="d-flex flex-column justify-content-between w-50">
                             <label class="form-label">Documento</label>
                             <div class="mb-3 datoCliente">
-                                <input type="number" pattern="[0-9]{8,10}(\.[0-9]+)?" min="10000000" class="documentoABuscar form-control">
-                                <button type="button" class="buscarCitasCliente btn btn-secondary my-1" onclick="buscarCitasCliente()">Buscar</button>
+                                <input type="number" pattern="[0-9]{8,10}(\.[0-9]+)?" min="10000000"
+                                    class="documentoABuscar form-control">
+                                <button type="button" class="buscarCitasCliente btn btn-secondary my-1"
+                                    onclick="buscarCitasCliente()">Buscar</button>
                             </div>
                         </div>
                     </form>
@@ -123,26 +126,28 @@
                 </div>
             </div>
 
-            <!-- Tabla para mostrar las citas traidas -->
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center align-items-center py-3">
-                    <table class="table mt-5 text-white mb-5">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id Cita</th>
-                                <th scope="col">Propiedad Nº</th>
-                                <th scope="col">Fecha cita</th>
-                                <th scope="col">Hora cita</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Nombre Asesor</th>
-                                <th scope="col">Tel Asesor</th>
-                                <th scope="col"> </th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+
+
+                <!-- Tabla para mostrar las citas traidas -->
+                <div class="row w-100">
+                    <div class="col-12 d-flex justify-content-center align-items-center py-3">
+                        <table class="table mt-5 text-white mb-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id Cita</th>
+                                    <th scope="col">Propiedad Nº</th>
+                                    <th scope="col">Fecha cita</th>
+                                    <th scope="col">Hora cita</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Nombre Asesor</th>
+                                    <th scope="col">Tel Asesor</th>
+                                    <th scope="col"> </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
         </div>
     </main>
 

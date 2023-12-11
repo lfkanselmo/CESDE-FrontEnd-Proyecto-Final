@@ -17,6 +17,7 @@ function login() {
         alertaExito("Bienvenido");
         inicioExitoso = true;
         actualizarTokenLS(response.data.token);
+        localStorage.setItem("usuario", JSON.stringify(username.toLowerCase()));
         volverAPaginaPrevia(inicioExitoso);
     })
     .catch(function (error) {
@@ -37,11 +38,12 @@ function actualizarTokenLS(token){
 // Funcion para el registro
 function registro() {
 
-    let username = document.querySelector("#newUsername").value;
+    let username = document.querySelector("#newUsername").value.toLowerCase();
     let password = document.querySelector("#newPassword").value;
-    let name = document.querySelector("#nombre").value;
-    let lastName = document.querySelector("#apellido").value;
+    let name = capitalizar(document.querySelector("#nombre").value);
+    let lastName = capitalizar(document.querySelector("#apellido").value);
     let phone = document.querySelector("#telefono").value;
+    let role = document.querySelector("#role").value;
 
     let registroExitoso;
 
@@ -55,10 +57,9 @@ function registro() {
         firstName: name,
         lastName: lastName,
         phone: phone,
-        role: "ADMINISTRADOR"
+        role: role
     })
     .then(function (response) {
-        console.log(response.data);
         alertaExito("Usuario guardado con éxito");
         registroExitoso = true;
         volverAPaginaPrevia(registroExitoso);
@@ -81,6 +82,18 @@ function cancelarYVolver(btnCancelar){
 
 
 
+}
+
+//funcion para cancelar el registro
+function cancelarRegistro(){
+    let formRegistro = document.querySelector("#registerForm");
+    let inputsRegistro = formRegistro.querySelectorAll("input");
+    inputsRegistro.forEach(input => {
+        input.value = "";
+    })
+
+    volverAPaginaPrevia(true);
+        
 }
 
 // funcion para el switch a la hora de actualizar datos
@@ -111,21 +124,3 @@ function limpiarInputs(inputs){
         input.value = "";
     });
 }
-
-/*
-// Funcion para volver a la pagina anterior
-function volverAPaginaPrevia(Exitoso){
-    if (Exitoso) {
-        // Guardar página previa
-        var paginaPrevia = document.referrer;
-
-
-        if (paginaPrevia === "" || paginaPrevia === window.location.href) {
-            paginaPrevia = "index.html";
-        }
-
-        // Redirige a la página anterior
-        window.location.href = paginaPrevia;
-      }
-}
-*/

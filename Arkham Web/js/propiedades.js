@@ -1,5 +1,6 @@
 // Variables globales
 let idCapturado;
+btn = document.querySelector("#myBtn");
 
 // Boton de scroll
 window.addEventListener("scroll", (event)=>{
@@ -109,8 +110,6 @@ function editarPropiedad(btnEditar) {
     tipo.value = tipoValor.innerText;
     imagen.value = imagenValor.innerText;
 
-    console.log(imagen)
-
 
     // Evento cuando se le da click a cancelar la edición
     btnCancelar.addEventListener("click", () => {
@@ -189,8 +188,8 @@ async function guardarCambios(btnGuardar) {
 
     async function guardando() {
         // Proceso de guardado de nuevos valores, reemplazar a futuro por el consumo de la API
-        ciudadValor.innerText = ciudad.value;
-        barrioValor.innerText = barrio.value;
+        ciudadValor.innerText = ciudad.value.trim();
+        barrioValor.innerText = capitalizar(barrio.value.trim());
         precioValor.innerText = precio.value;
         patioValor.innerText = patio.value;
         zonaRopaValor.innerText = zonaRopa.value;
@@ -224,7 +223,6 @@ async function guardarCambios(btnGuardar) {
             image: imagenValor.innerText
         }
 
-        console.log(datosNuevos)
 
         await guardarCambiosBD(datosNuevos);
 
@@ -318,9 +316,9 @@ async function cargarInmueblesPorOferta(oferta) {
         .then(response => {
             if (!response.status === 200) {
                 alertaError(`No hay propiedades en ${oferta} para mostrar`);
-                console.log("La solicitud devolvió un código de estado 404 (No encontrado).");
             } else {
                 crearPropiedades(response.data, oferta);
+                validarTokenActual();
             }
         })
         .catch(error => {
@@ -346,7 +344,7 @@ function crearPropiedades(propiedades, oferta) {
 
                 let propiedad = document.createElement("div");
                 propiedad.style.maxWidth = "1250px";
-                propiedad.setAttribute("class", "propiedad card my-5 border-3 py-3");
+                propiedad.setAttribute("class", "propiedad card my-5 border-3 rounded py-3");
 
                 propiedad.innerHTML =
                     `
@@ -370,7 +368,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 <strong class="mx-1">ID: </strong>
                                             </th>
                                             <th>
-                                                <span id="idValor">${p.id}</span>
+                                                <span id="idValor">${p.propertyId}</span>
                                             </th>
                                         </tr>
 
@@ -382,7 +380,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 <span id="ciudadValor">${p.city} </span>
                                             </th>
                                             <th class="camposEditar d-none">
-                                                <input type="text" name="ciudad" id="ciudad">
+                                                <input type="text" name="ciudad" id="ciudad" pattern="[A-ZÑa-zñáéíóúÁÉÍÓÚäëïöüÄËÏÖÜ'° ]+">
                                             </th>
                                         </tr>
 
@@ -407,7 +405,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 
                                             </th>
                                             <th class="camposEditar d-none">
-                                                <input type="number" name="precio" min="1" id="precio">
+                                                <input type="number" name="precio" min="1" id="precio" pattern="[0-9]{6,}(\.[0-9]+)?">
                                             </th>
                                         </tr>
 
@@ -526,7 +524,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 <span id="banosValor"> ${p.bathrooms} </span>
                                             </td>
                                             <td class="camposEditar d-none">
-                                                <input type="number" name="banhos" min="1" max="10" id="banhos">
+                                                <input type="number" name="banhos" min="1" max="10" id="banhos" pattern="[0-9]{,1}(\.[0-9]+)?">
                                             </td>
                                         </tr>
 
@@ -538,7 +536,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 <span id="areaValor"> ${p.area} </span>
                                             </td>
                                             <td class="camposEditar d-none">
-                                                <input type="number" name="area" min="1" id="area">
+                                                <input type="number" name="area" min="1" id="area" pattern="[0-9]{,5}(\.[0-9]+)?">
                                             </td>
                                         </tr>
 
@@ -552,7 +550,7 @@ function crearPropiedades(propiedades, oferta) {
 
                                             <td class="camposEditar d-none">
                                                 <input type="number" name="habitaciones" min="1" max="10"
-                                                    id="habitaciones">
+                                                    id="habitaciones" pattern="[0-9]{,2}(\.[0-9]+)?">
                                             </td>
                                         </tr>
 
@@ -564,7 +562,7 @@ function crearPropiedades(propiedades, oferta) {
                                                 <span id="nivelValor"> ${p.level} </span>
                                             </td>
                                             <td class="camposEditar d-none">
-                                                <input type="number" name="nivel" min="1" max="100" id="nivel">
+                                                <input type="number" name="nivel" min="1" max="100" id="nivel" pattern="[0-9]{,3}(\.[0-9]+)?">
                                             </td>
                                         </tr>
 
@@ -575,8 +573,7 @@ function crearPropiedades(propiedades, oferta) {
                                             </tr>
                                             <tr class="camposOcultos d-none" >
                                             <td colspan="3">
-                                                <span> <span id="imagenValor"> ${p.image} </span></span>
-                                                
+                                                <span> <span id="imagenValor"> ${p.image} </span></span>                                                
                                             </td>
                                             </tr>
                                             <tr class="camposOcultos d-none">

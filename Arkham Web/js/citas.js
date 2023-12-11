@@ -26,47 +26,63 @@ let btnGuardar = document.querySelector(".btn-guardarDatos");
 let btnBuscar = document.querySelector(".buscarCliente");
 let formCitas = document.querySelector(".formCitas");
 let camposInputs = document.querySelectorAll(".datoCliente");
+let documento = document.querySelector(".documento");
+let asesorSelect = formCitas.querySelector("#asesor");
+
+asesorSelect.addEventListener("change", ()=>{
+    fecha.value = "";
+})
 
 fecha.setAttribute("min", format);
 
 // Acciones a realizar apenas se cargue la página
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
     validarTokenActual();
     id = sacarIdCapturado();
     ponerId(id);
     btnAgendar.disabled = true;
     btnGuardar.disabled = true;
     btnBuscar.disabled = false;
-    let documento = document.querySelector(".documento");
     documento.value = "";
+    fecha.value = "";
     limpiarCamposEditables(camposInputs)
     guardarDatosCliente();
+    await traerUsuarios();
 })
 
 // Evento input en el campo de fecha
 fecha.addEventListener("input", () => {
     // Enviar a la base de datos la fecha para validar las horas disponibles
 
-    let urlBuscarFecha = urlDomain + "/appointment/date";
+    let urlBuscarFecha = urlDomain + "/appointment/dateusername";
     btnAgendar.disabled = false;
 
     axios.post(urlBuscarFecha, {
-        date: fecha.value
+        date: fecha.value,
+        userEmail: asesor.value
     })
         .then(response => {
             if (response.status !== 200) {
-                console.log(response.request.responseText);
+                console.error(error.request.responseText);
             } else {
                 cargarHoras(response.data);
             }
         })
         .catch(error => {
             cargarHoras(null);
-            console.error(error)
         })
 
 
 });
+
+// Deshabilitar el boton de buscar si el campo documento no es válido
+documento.addEventListener("keyup", ()=>{
+    if(documento.validity.valid === false || documento.value === ""){
+        btnBuscar.disabled = true;
+    }else{
+        btnBuscar.disabled = false;
+    }
+})
 
 // Funcion para buscar cliente por id
 function buscarCliente() {
@@ -74,7 +90,8 @@ function buscarCliente() {
     let urlBuscar = urlDomain + "/client/" + documento.value;
     let fecha = formCitas.querySelector(".fecha");
 
-    axios.get(urlBuscar)
+    if(documento.value.trim() !== ""){
+        axios.get(urlBuscar)
         .then(response => {
             if (response.status === 200) {
                 ponerValoresTraidos(response.data);
@@ -97,6 +114,11 @@ function buscarCliente() {
             fecha.value = "";
             habilitarInputs();
         })
+    }else{
+        alertaError("El documento no debe estar vacío para poder realizar la búsqueda");
+    }
+
+    
 
 }
 
@@ -107,6 +129,8 @@ function limpiarCamposEditablesParaCita() {
     let telefono = formCitas.querySelector(".telefono");
     let email = formCitas.querySelector(".email");
     let fecha = formCitas.querySelector(".fecha");
+    let asesor = formCitas.querySelector("#asesor");
+    let hora = formCitas.querySelector("#hora");
 
 
     nombre.value = "";
@@ -114,6 +138,8 @@ function limpiarCamposEditablesParaCita() {
     telefono.value = "";
     email.value = "";
     fecha.value = "";
+    asesor.value = "";
+    hora.value = "";
 }
 
 // Funcion para poner los datos traidos de la BD cuando encuentra cliente por id
@@ -173,18 +199,18 @@ function guardarClienteBD() {
     let camposEditables = formCitas.querySelectorAll(".datoCliente");
 
     let documento = formCitas.querySelector(".documento").value;
-    let nombre = formCitas.querySelector(".nombre").value;
-    let apellido = formCitas.querySelector(".apellido").value;
+    let nombre = capitalizar(formCitas.querySelector(".nombre").value);
+    let apellido = capitalizar(formCitas.querySelector(".apellido").value);
     let telefono = formCitas.querySelector(".telefono").value;
-    let email = formCitas.querySelector(".email").value;
+    let email = formCitas.querySelector(".email").value.toLowerCase();
 
     let datosCliente =
     {
-        clientId: documento,
-        firstName: nombre,
-        lastName: apellido,
-        phone: telefono,
-        email: email
+        clientId: documento.trim(),
+        firstName: nombre.trim(),
+        lastName: apellido.trim(),
+        phone: telefono.trim(),
+        email: email.trim()
     }
 
     axios.post(urlGuardarCliente, datosCliente)
@@ -301,58 +327,41 @@ async function guardarCita() {
     let idInmueble = idPropiedad.innerText;
     let fecha = formCitas.querySelector(".fecha").value;
     let hora = formCitas.querySelector("#hora").value;
+    let emailUsuario = formCitas.querySelector("#asesor").value;
     let idUsuario;
 
-    let urlBuscarIdUsuario = urlDomain + "/auth/user/all";
+    let urlBuscarUsuario = urlDomain + "/auth/user/email/"+emailUsuario;
+    await axios.get(urlBuscarUsuario)
+    .then(response => {
+        idUsuario = response.data.userId;
+    })
+    .catch(error =>{
+        console.error(error.request.responseText);
+    })
 
-    await axios.get(urlBuscarIdUsuario)
-        .then(response => {
-            let usuarios = response.data;
-            if (usuarios.length > 0) {
-                idUsuario = usuarios[0].userId;
-            } else {
-                alertaError("No hay administradores disponibles para esta fecha y hora");
-            }
-        })
-        .catch(error => {
-            console.error(error)
-            alertaError("No hay administradores disponibles para esta fecha y hora");
-        })
-
-    if (
-        documento !== "" &&
-        idInmueble !== "" &&
-        fecha !== "" &&
-        hora !== "" &&
-        idUsuario !== ""
-    ) {
-        guardarCitaEnBD(documento, idInmueble, fecha, hora, idUsuario);
-    } else {
-        alertaError("No se puede guardar la cita, verifique los campos");
-    }
+    guardarCitaEnBD(documento, idInmueble, fecha, hora, idUsuario);
 }
 
 // Funcion para guardar la cita en la base de datos
-function guardarCitaEnBD(documento, idInmueble, fecha, hora, idUsuario) {
+async function guardarCitaEnBD(documento, idInmueble, fecha, hora, idUsuario) {
     let urlGuardarCita = urlDomain + "/appointment/save";
     let fechaInput = formCitas.querySelector(".fecha");
     let documentoInput = formCitas.querySelector(".documento");
 
     axios.post(urlGuardarCita, {
         userId: idUsuario,
-        clientId: documento,
-        propertyId: idInmueble,
+        clientId: documento.trim(),
+        propertyId: idInmueble.trim(),
         startTime: hora,
         date: fecha
     })
-        .then(response => {
+        .then(async response => {
             if (response.data !== null) {
-                console.log(response.data)
                 alertaExito("Cita guardada con éxito");
                 fechaInput.value = "";
                 documentoInput.value = "";
                 limpiarCamposEditablesParaCita();
-                let res = generarPDF();
+                let res = await generarPDF();
                 if (res) {
                     pdfFromBD(response.data.appointmentId);
                 }
@@ -369,13 +378,7 @@ function guardarCitaEnBD(documento, idInmueble, fecha, hora, idUsuario) {
         })
 }
 
-// Alerta para confirmar si desea imprimir el pdf o no
-async function generadorPDF(idCita) {
-    let res = await generarPDF();
-    if (res) {
-        pdfFromBD(idCita);
-    }
-}
+
 
 // Imprimir la cita guardada en la base de datos
 async function pdfFromBD(idCita) {
@@ -397,18 +400,46 @@ async function pdfFromBD(idCita) {
             link.click();
         })
         .catch(error => {
-            console.log(`No se pudo generar el PDF. 
+            console.error(`No se pudo generar el PDF. 
             ${error}`)
         })
 }
 
-/*
 
-SE HABILITARÁ CUANDO SE GESTIONE TENER MULTIPLES ADMINISTRADORES Y USUARIOS
+
+
 
 // funcion para traer el id del usuario disponible para fecha y hora especifica
-async function traerIdUsuario(fecha, hora){
+async function traerUsuarios(){
+    let urlTraerUsuarios = urlDomain + "/auth/user/all";
 
+    axios.get(urlTraerUsuarios)
+    .then(response => {
+        ponerUsuariosEnSelect(response.data);
+    })
+    .catch(error => {
+        console.error("No se pudo traer los usuarios");
+    })
 }
 
-*/
+// Funcion para poner los usuarios traidos en el select
+async function ponerUsuariosEnSelect(usuarios){
+    let selectAsesores = document.querySelector("#asesor");
+    let asesoresElegibles = selectAsesores.querySelectorAll(".asesorElegible");
+
+    // Limpiar antes de agregar asesores disponibles nuevos
+    asesoresElegibles.forEach(asesor => {
+        hora.remove();
+    })
+    
+    // Agregar los asesores
+    usuarios.forEach(usuario => {
+        let asesorOption = document.createElement("option");
+        asesorOption.classList.add("asesorElegible");
+        asesorOption.value = usuario.email;
+        asesorOption.textContent = `${usuario.firstName} ${usuario.lastName}`;
+
+        selectAsesores.appendChild(asesorOption);
+    })
+}
+

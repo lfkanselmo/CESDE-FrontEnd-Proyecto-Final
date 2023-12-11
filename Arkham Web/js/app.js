@@ -18,10 +18,12 @@ function cerrarSesion(){
     .then(response => {
         if(response.status === 200){
             window.location.href = "index.html";
+            localStorage.setItem("usuario", JSON.stringify(""));
         }
     })
     .catch(error => {
         console.error(error);
+        alertaError("Algo falló al cerrar sesión. Intente de nuevo");
     })
 }
 
@@ -57,10 +59,10 @@ function validarDatos(campos) {
     let todosValidos = true;
     campos.forEach(function (contenedorCampo) {
         let campo = contenedorCampo.firstElementChild;
+        let form = contenedorCampo.parentElement;
+        let btnBuscar = form.querySelector(".botonBuscar");
 
-        // Si el input o select está vacío, o es invalido retorna false
-
-        if(campo.classList.contains("documento")){
+        if(campo.classList.contains("documento") && campo.validity.valid === true && campo.value !== ""){
             btnBuscar.disabled = false;
         }
 
@@ -96,4 +98,23 @@ async function volverAPaginaPrevia(Exitoso){
         // Redirige a la página anterior
         window.location.href = paginaPrevia;
       }
+}
+
+// Funcion para convertir a capitaliceCase
+function capitalizar(palabra){
+    var palabras = palabra.split(' ');
+
+    // Capitalizar la primera letra de cada palabra
+    let palabrasCapitalizadas = palabras.map(function (palabra) {
+        if (palabra.length > 0) {
+            return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
+        } else {
+            return palabra;
+        }
+    });
+
+    // Unir las palabras capitalizadas en una cadena
+    let resultado = palabrasCapitalizadas.join(' ');
+
+    return resultado;
 }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="shortcut icon" href="media/logo.png" />
 
-    <title>DASHBOARD ADMINISTRADOR</title>
+    <title>CITAS</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@
             <div class="row d-flex d-column justify-content-center w-100">
                 <div class="links col-12 d-flex flex-column flex-md-row align-items-center">
                     <div>
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="index.html">
                             <span class="fs-5 mi-color-personalizado fw-bold">ARKHAM PROPERTIES</span>
                         </a>
                     </div>
@@ -58,14 +58,20 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="alquiler.html" id="btn-alquiler" id="img">ALQUILER</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-none" href="AdminDashBoard.html" id="btn-dashboard"
+                                    id="img">DASHBOARD</a>
+                            </li>
+
                         </ul>
                     </div>
 
                     <!-- REGISTRO E INICIO DE SESION -->
                     <div id="galeria"></div>
                     <div class="botonesRegistroLogin d-flex justify-content-end p-2 ">
-                            <a id="btnIniciarSesion" href="login.html" class="btn btn-secondary mx-2">Iniciar sesión</a>
-                            <button type="button" id="btnCerrarSesion" class="btn btn-secondary mx-2 d-none" onclick="cerrarSesion()">Cerrar sesión</button>
+                        <a id="btnIniciarSesion" href="login.html" class="btn btn-secondary mx-2">Iniciar sesión</a>
+                        <button type="button" id="btnCerrarSesion" class="btn btn-secondary mx-2 d-none"
+                            onclick="cerrarSesion()">Cerrar sesión</button>
                     </div>
                 </div>
             </div>
@@ -76,27 +82,65 @@
     <!-- FORMULARIO CITA -->
 
     <main>
-
         <div class="container">
-            <div class="row justify-content-between my-5">
-                <dic class="col-12 d-flex justify-content-center">
-                    <h2>Dashboard de <strong class="nombreAdmin"></strong></h2>
-                </dic>
+            <!-- Selector de fecha para buscar citas -->
+            <div class="row busquedaDocumentoSeccion">
+                <div class="col-12 d-flex justify-content-center align-items-center py-3">
+                    <form class="p-4 formBuscarCitas w-100 d-flex justify-content-center">
+                        <div class="d-flex flex-column justify-content-between w-50">
+                            <label class="form-label">Documento</label>
+                            <div class="mb-3 datoCliente">
+                                <input type="number" pattern="[0-9]{8,10}(\.[0-9]+)?" min="10000000" class="documentoABuscar form-control">
+                                <button type="button" class="buscarCitasCliente btn btn-secondary my-1" onclick="buscarCitasCliente()">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="container-fluid">
-            <div class="row d-flex flex-column flex-sm-row justify-content-center align-items-center align-items-sm-center justify-content-sm-between my-5">
-                <div class="col-6 d-flex justify-content-center my-5">
-                    <a href="propiedadesAdmin.html"><button class="propiedades btn btn-secondary botones">Porpiedades</button></a>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <a href="citasAdmin.html"><button class="citas btn btn-secondary botones">Citas</button></a>
+            <div class="row editarCitaSeccion d-none">
+                <div class="col-12 d-flex justify-content-center align-items-center py-3">
+                    <form class="p-4 formEditarCita w-100 d-flex justify-content-center">
+                        <div class="d-flex flex-column justify-content-between w-50">
+                            <label class="form-label fontSize30 fw-bolder">Fecha nueva</label>
+                            <div>
+                                <input type="date" id="fechaEditar" class="form-control" required>
+                            </div>
+                            <label class="form-label fontSize30 fw-bolder">Hora nueva</label>
+                            <div>
+                                <select id="horaEditar" name="hora" required>
+                                    <option value="" disabled selected hidden>Seleccione hora</option>
+                                </select>
+                            </div>
+                            <div class="d-flex w-100 my-4">
+                                <button class="btnGuardarCambiosCitas btn btn-secondary" type="button"
+                                    onclick="guardarCambiosCitaDB()">Guardar Cambios</button>
+                                <button class="btn-cancelarEditarCita btn btn-secondary mx-4"
+                                    onclick="cancelarEditarCita()">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="row d-flex flex-column flex-sm-row justify-content-center align-items-center align-items-sm-center justify-content-sm-between my-5">
-                <div class="col-6 d-flex justify-content-center">
-                    <a href="registro.html"><button class="registroUsuarios btn btn-secondary botones d-none">Registrar</button></a>
+
+            <!-- Tabla para mostrar las citas traidas -->
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center align-items-center py-3">
+                    <table class="table mt-5 text-white mb-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id Cita</th>
+                                <th scope="col">Propiedad Nº</th>
+                                <th scope="col">Fecha cita</th>
+                                <th scope="col">Hora cita</th>
+                                <th scope="col">Direccion</th>
+                                <th scope="col">Nombre Cliente</th>
+                                <th scope="col">Tel Cliente</th>
+                                <th scope="col"> </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -124,7 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/validacionSesion.js"></script>
     <script src="/js/app.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="js/citasCliente.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="/js/sweetAlert.js"></script>
 </body>

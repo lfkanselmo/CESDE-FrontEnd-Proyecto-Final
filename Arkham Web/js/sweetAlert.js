@@ -3,7 +3,7 @@ async function GuardarAlert() {
 
     let resultado;
      await Swal.fire({
-        title: "Desea guardar los cambios?",
+        title: "¿Desea guardar los cambios?",
         text: "Verifique la información antes de guardar",
         icon: "warning",
         showCancelButton: true,
@@ -18,6 +18,40 @@ async function GuardarAlert() {
             Swal.fire({
                 title: "¡Guardado!",
                 text: "Sus cambios han sido guardados",
+                icon: "success",
+                backdrop: true,
+                background: "#f5f5dc"
+            });  
+            // Si la alerta es confirmada se devuelve true      
+            resultado = true;
+        }else{
+            // Si la alerta es cancelada se devuelve false
+            resultado = false;
+        }     
+
+    });   
+
+    return resultado;
+}
+
+async function borrarAlert(elementoAEliminar) {
+
+    let resultado;
+     await Swal.fire({
+        title: `¿Está seguro que desea borrar ${elementoAEliminar}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#ff4500",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        backdrop: true,
+        background: "#f5f5dc"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "¡Eliminado!",
+                text: `${elementoAEliminar} ha sido eliminada`,
                 icon: "success",
                 backdrop: true,
                 background: "#f5f5dc"
@@ -61,6 +95,13 @@ async function generarPDF(){
             // Si la alerta es confirmada se devuelve true      
             resultado = true;
         }else{
+            Swal.fire({
+                title: "¡Guardado!",
+                text: "Sus cambios han sido guardados",
+                icon: "success",
+                backdrop: true,
+                background: "#f5f5dc"
+            });
             // Si la alerta es cancelada se devuelve false
             resultado = false;
         }     
@@ -72,7 +113,7 @@ async function generarPDF(){
 
 function alertaExito(mensajeRecibido){
     Swal.fire({
-        title: "Exito",
+        title: "Éxito",
         text: mensajeRecibido,
         icon: "success"
       });
@@ -88,7 +129,7 @@ function alertaError(mensajeRecibido){
 
 function alertaInfo(mensajeRecibido){
     Swal.fire({
-        title: "Info",
+        title: "Información",
         text: mensajeRecibido,
         icon: "info"
       });

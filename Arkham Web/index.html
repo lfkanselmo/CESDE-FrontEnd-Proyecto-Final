@@ -20,7 +20,7 @@
 
     <!-- HEADER -->
 
-    <header class="container-fluid bg-mi-color d-flex justify-content-between align-items-center p-2">
+    <header class="container-fluid bg-mi-color d-flex flex-column align-items-center justify-content-center flex-sm-row justify-content-sm-between align-items-sm-center py-2">
         <div class="logo">
             <img src="media/logoHeader.jpg" alt="Logo" class="logo-img">
         </div>
@@ -34,37 +34,47 @@
         <!-- BARRA NAV BOTONES VENTA - ALQUILER-->
 
         <nav class="navbar navbar-expand-lg mi-color-personalizado navbar-light p-3" id="menu">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row d-flex d-column justify-content-center w-100">
-                    <div class="links col-12 d-flex d-row align-items-center">
-                        <a class="navbar-brand" href="#">
-                            <span class="fs-5 mi-color-personalizado fw-bold">ARKHAM PROPERTIES</span>
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    <div class="links col-12 d-flex flex-column flex-md-row align-items-center">
+                        <div>
+                            <a class="navbar-brand" href="#">
+                                <span class="fs-5 mi-color-personalizado fw-bold">ARKHAM PROPERTIES</span>
+                            </a>
+                        </div>
+                        <div>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+                        </div>
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="col-auto collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="index.html">INICIO</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="ventas.html" id="btn-venta" id="img">VENTAS</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="alquiler.html" id="btn-alquiler" id="img">ALQUILER</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-none" href="AdminDashBoard.html" id="btn-dashboard"
+                                        id="img">DASHBOARD</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="citasCliente.html" id="btn-citasCliente"
+                                        id="img">CITAS</a>
+                                </li>
                             </ul>
                         </div>
 
                         <!-- REGISTRO E INICIO DE SESION -->
                         <div class="botonesRegistroLogin d-flex justify-content-end p-2 ">
-                                <a id="btnIniciarSesion" href="login.html" class="btn btn-secondary mx-2">Iniciar sesión</a>
-                                <button type="button" id="btnCerrarSesion" class="btn btn-secondary mx-2 d-none" onclick="cerrarSesion()">Cerrar sesión</button>
-                                
+                            <a id="btnIniciarSesion" href="login.html" class="btn btn-secondary mx-2">Iniciar sesión</a>
+                            <button type="button" id="btnCerrarSesion" class="btn btn-secondary mx-2 d-none"
+                                onclick="cerrarSesion()">Cerrar sesión</button>
+
                         </div>
                     </div>
                 </div>
@@ -115,63 +125,37 @@
         </section>
 
         <!-- SECCION DE IMAGENES EN EL CATALOGO -->
-        <section class="w-100">
-            <div class="row w-75 mx-auto justify-content-around" id="servicios-fila-1 local">
+        <div class="container">
+            <section class="w-100">
+                <!-- Gallery -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                        <img src="media/IndexCasas/casa 1.jpg" class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Boat on Calm Water" />
 
-
-                <div
-                    class="col-lg-5 col-md-12 col-sm-12 d-flex justify-content-start my-5 icono-wrap border border-2 rounded-pill ">
-                    <img src="media/IndexCasas/casa 1.jpg" alt="desarrollo" class="img-hover rounded-pill " width="450"
-                        height="160" id="imagen1" data-habitaciones="3" data-banos="2" data-area="150m²">
-
-
-                    <div>
-                        <h3 class="fs-5 mt-4 px-4 pb-1 mi-color-personalizado">ALQUILER</h3>
-                        <p class="px-4 px-45">Casa en alquiler - Ubicada en el barrio Manrique</p>
+                        <img src="media/IndexCasas/casa 2.jpg" class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Wintry Mountain Landscape" />
                     </div>
 
-                </div>
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <img src="media/IndexCasas/casa 4.jpg" class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Mountains in the Clouds" />
 
-                <div
-                    class="col-lg-5 col-md-12 col-sm-12 d-flex justify-content-start  my-5 icono-wrap border border-2 rounded-pill">
-                    <img src="media/IndexCasas/casa 2.jpg" alt="desarrollo" class="img-hover rounded-pill" width="450"
-                        height="160" id="imagen2" data-habitaciones="4" data-banos="3" data-area="200m²">
+                        <img src="media/IndexCasas/casa 3.jpg" class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Boat on Calm Water" />
+                    </div>
 
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <img src="media/IndexCasas/casa 5.jpg" class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Waves at Sea" />
 
-                    <div>
-                        <h3 class="fs-5 mt-4 px-4 pb-1 icono-wrap mi-color-personalizado">ALQUILER</h3>
-                        <p class="px-4 px-45">Casa en alquiler - Ubicada en el barrio el Pobado - Sector Plamas</p>
+                        <img src="media/IndexCasas/casa 6.jpg" class="w-100 shadow-1-strong rounded mb-4"
+                            alt="Yosemite National Park" />
                     </div>
                 </div>
-            </div>
-            <!-- ----------------------------------------------------------------- -->
-            <div class="row w-75 mx-auto d-wrap mb-5 justify-content-around" id="servicios-fila-2">
-
-                <div
-                    class="col-lg-5 col-md-12 col-sm-12 d-flex justify-content-around my-5 icono-wrap  border border-2 rounded-pill wi-40">
-                    <img src="media/IndexCasas/casa 3.jpg" alt="desarrollo" class="img-hover rounded-pill" width="250"
-                        height="160" id="imagen3" data-habitaciones="2" data-banos="2" data-area="70m²">
-
-
-                    <div>
-                        <h3 class="fs-5 mt-4 px-4 pb-1 mi-color-personalizado">VENTA</h3>
-                        <p class="px-4 px-45">Apartamento en venta - Ubicado en el barrio Laureles</p>
-                    </div>
-                </div>
-
-                <div
-                    class="col-lg-5 col-md-12 col-sm-12 d-flex justify-content-around my-5 icono-wrap border border-2 rounded-pill wi-40">
-                    <img src="media/IndexCasas/casa 4.jpg" alt="desarrollo" class="img-hover rounded-pill" width="250"
-                        height="160" id="imagen4" data-habitaciones="3" data-banos="2" data-area="90m²">
-
-
-                    <div>
-                        <h3 class="fs-5 mt-4 px-4 pb-1 mi-color-personalizado">VENTA</h3>
-                        <p class="px-4 px-45">Casa en venta - Ubicado en el barrio Belen </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <!-- Gallery -->
+            </section>
+        </div>
 
         <!-- INFORMACION GENERAL -->
 
